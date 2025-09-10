@@ -1,0 +1,24 @@
+{
+  "minio": {
+    "endpoint": "10.64.113.194:9000",
+    "access_key": "72CdCOVaIpGa7A8n",
+    "secret_key": "3JP6MuYodDlAXwSVnYFaNBETtfXNgbtG",
+    "secure": false,
+    "bucket_name": "report",
+    "base_prefix": "核心网络部运维报告"
+  },
+  "local": {
+    "base_path": "核心网络部运维报告"
+  },
+  "output": {
+    "base_directory": "核心网络部运维报告",
+    "create_date_folder": true,
+    "date_format": "%Y%m%d",
+    "upload_to_minio": true,
+    "minio_upload_path": "核心网络部运维报告/核心网络部月底总结报表"
+  },
+  "pdf_api_url": "http://198.44.188.138:7434/v2/parse/file",
+  "pdf_parse_mode": "image",
+  "pdf_to_image_dpi": 200,
+  "temp_dir": "./tmp/minio_files"
+}
