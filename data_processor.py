@@ -121,7 +121,7 @@ class CoreDataProcessor:
         if 'report_date' in variables:
             variables['report_date'] = datetime.now().strftime('%Y年%m月%d日')
 
-        if target_date is None:
+        if target_date is None or (isinstance(target_date, str) and target_date.strip() == ""):
             # 获取上个月的年月
             today = datetime.today()
             first_day_current_month = today.replace(day=1)
@@ -130,6 +130,7 @@ class CoreDataProcessor:
             variables['year'] = last_month.strftime("%Y")
             variables['month'] = last_month.strftime("%m")
         else:
+            target_date = target_date.strip()
             variables['year'] = target_date[:4]
             variables['month'] = target_date[4:]
         # 扫描所有文件

@@ -55,7 +55,7 @@ class MinioFileScanner:
         file_dict = {}
         
         # 如果没有指定日期，则使用上个月
-        if target_date is None:
+        if target_date is None or target_date == "":
             # 获取上个月的年月
             today = datetime.today()
             first_day_current_month = today.replace(day=1)
