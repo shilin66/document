@@ -112,9 +112,11 @@ class CoreTemplateMerger:
                 if var_value['type'] == 'sub_doc':
                     processed_variables[var_name] = doc.new_subdoc(var_value['value'])
                 elif var_value['type'] == 'image':
-                    processed_variables[var_name] = InlineImage(doc, var_value['value'], width=Cm(20))
+                    width = var_value.get('width', 20)
+                    processed_variables[var_name] = InlineImage(doc, var_value['value'], width=Cm(width))
                 elif var_value['type'] == 'image_array' and isinstance(var_value['value'], list):
-                    processed_variables[var_name] = self._process_image_array(doc, var_value['value'])
+                    width = var_value.get('width', 20)
+                    processed_variables[var_name] = self._process_image_array(doc, var_value['value'], width)
                 else:
                     # 其他类型，作为文本处理
                     processed_variables[var_name] = str(var_value.get('value', var_value))
@@ -124,7 +126,7 @@ class CoreTemplateMerger:
         
         doc.render(processed_variables)
 
-    def _process_image_array(self, doc: DocxTemplate, image_paths: list):
+    def _process_image_array(self, doc: DocxTemplate, image_paths: list, width: float):
         """
         将图片路径数组转换为InlineImage数组，支持Jinja数组语法
         
@@ -145,7 +147,7 @@ class CoreTemplateMerger:
                 if os.path.exists(image_path):
                     try:
                         # 创建InlineImage对象，设置合适的宽度
-                        inline_image = InlineImage(doc, image_path, width=Cm(20))
+                        inline_image = InlineImage(doc, image_path, width=Cm(width))
                         inline_images.append(inline_image)
                     except Exception as e:
                         print(f"创建InlineImage失败 {image_path}: {e}")

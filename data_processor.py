@@ -289,7 +289,8 @@ class CoreDataProcessor:
                     if len(imgs) > 0:
                         variables['internet_traffic_stats'] = {
                             'type': 'image',
-                            'value': imgs[0]
+                            'value': imgs[0],
+                            'width': 18
                         }
                         if imgs[1]:
                             variables['isp_bandwidth'] = {
@@ -324,13 +325,6 @@ class CoreDataProcessor:
             if file_path.endswith('.pdf'):
                 # 处理PDF文件
                 self._process_pdf_file(file_path, variables)
-            elif '核心设备硬件指标' in filename:
-                if 'core_device_hardware' in variables:
-                    variables['core_device_hardware'] = {
-                        'type': 'image',
-                        'value': f"核心设备硬件指标报告：{filename}\n文件路径：{file_path}"
-                    }
-                    summary_parts.append("核心设备硬件指标")
 
     def _process_monthly_plan_and_summary_files(self, files: List[str], variables: Dict[str, Any]):
         """处理陈斌的月度计划总结文件"""
@@ -457,7 +451,8 @@ class CoreDataProcessor:
                     if 'core_device_hardware' in variables:
                         variables['core_device_hardware'] = {
                             'type': 'image_array',
-                            'value': image_paths
+                            'value': image_paths,
+                            'width': 14
                         }
                 else:
                     # API模式：使用文本内容

@@ -62,6 +62,8 @@ def excel_to_pdf_uno(input_path, output_pdf, sheet_name=None):
             page_style.RightMargin = 0
             page_style.TopMargin = 0
             page_style.BottomMargin = 0
+            page_style.setPropertyValue("HeaderIsOn", False)
+            page_style.setPropertyValue("FooterIsOn", False)
 
             # 激活目标sheet
             controller = doc.getCurrentController()
@@ -87,6 +89,8 @@ def excel_to_pdf_uno(input_path, output_pdf, sheet_name=None):
                 page_style.RightMargin = 0
                 page_style.TopMargin = 0
                 page_style.BottomMargin = 0
+                page_style.setPropertyValue("HeaderIsOn", False)
+                page_style.setPropertyValue("FooterIsOn", False)
 
             # 导出所有sheet的PDF
             pdf_props = (PropertyValue("FilterName", 0, "calc_pdf_Export", 0),)
